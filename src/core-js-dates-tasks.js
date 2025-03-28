@@ -205,15 +205,19 @@ function getWeekNumberByDate(date) {
  * Date(2023, 1, 1) => Date(2023, 9, 13)
  */
 function getNextFridayThe13th(date) {
-  const tempDate = new Date(date);
+  const nextDate = new Date(date);
 
-  while (true) {
-    tempDate.setDate(13);
-    if (tempDate.getDay() === 5 && tempDate > date) {
-      return tempDate;
-    }
-    tempDate.setMonth(tempDate.getMonth() + 1);
+  if (nextDate.getDate() > 13) {
+    nextDate.setMonth(nextDate.getMonth() + 1);
   }
+
+  nextDate.setDate(13);
+
+  while (nextDate.getDay() !== 5) {
+    nextDate.setMonth(nextDate.getMonth() + 1);
+  }
+
+  return nextDate;
 }
 
 /**
